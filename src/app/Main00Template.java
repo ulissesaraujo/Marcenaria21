@@ -39,7 +39,7 @@ public class Main00Template {
 		double profundidadeRodape = 0;
 		
 		// Largura padrão dos módulos (mm) - cada módulo pode ter sua própria largura se precisar
-		double larguraPadrao = 930;
+		double larguraPadrao = 910;
 		
 		// Tipo de dobradiça: true=reta (desconto 1mm), false=curva (desconto 7mm)
 		boolean dobradicaReta = true;
