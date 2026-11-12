@@ -44,7 +44,7 @@ public class Main00Template {
 		// Tipo de dobradiça: true=reta (desconto 1mm), false=curva (desconto 7mm)
 		boolean dobradicaReta = true;
 		
-		// Rodízio: true=base maior para rodízios (lateral menor), false=padrão suspenso
+		// Rodízio: true=base maior para rodízios (lateral menor), false=padrão suspenso (para lateral não forçar a base onde é parafusado e cair para frente)
 		boolean comRodizio = false;
 		
 		

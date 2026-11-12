@@ -56,6 +56,18 @@ public record Peca(
     }
 
     /**
+     * Formato D'Paula: qtd, altura(cm), prof(cm), nome
+     * Medidas em centímetros (divide por 10)
+     */
+    public String toStringDPaula() {
+        String tab = "\t";
+        return qtd + tab
+            + Double.toString(altura / 10).replace(".", ",") + tab
+            + Double.toString(profundidade / 10).replace(".", ",") + tab
+            + nome;
+    }
+
+    /**
      * Formato básico: qtd, altura, prof
      */
     public String toStringBasico() {
@@ -67,7 +79,7 @@ public record Peca(
     
     /**
      * Imprime a peça no formato especificado
-     * @param modelo 1=básico, 2=comNome, 3=comFitamento(padrão), 4=completo
+     * @param modelo 1=básico, 2=comNome, 3=comFitamento(padrão), 4=completo, 5=DPaula(cm)
      */
     public void imprimir(int modelo) {
         switch (modelo) {
@@ -75,6 +87,7 @@ public record Peca(
             case 2 -> System.out.println(this.toStringComNome());
             case 3 -> System.out.println(this.toString());
             case 4 -> System.out.println(this.toStringCompleto());
+            case 5 -> System.out.println(this.toStringDPaula());
             default -> System.out.println(this.toString());
         }
     }

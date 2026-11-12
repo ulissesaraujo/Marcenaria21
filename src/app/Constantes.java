@@ -12,10 +12,11 @@ public class Constantes {
      * Modelo de saída para impressão das peças.
      * 1 = Básico (qtd, comp, larg)
      * 2 = Com nome (qtd, comp, larg, nome)
-     * 3 = Padrão (qtd, comp, larg, nome, material)
+     * 3 = Padrão (qtd, comp, larg, nome, f1-f4)
      * 4 = Completo (qtd, comp, larg, nome, f1-f4, material)
+     * 5 = DPaula (qtd, comp(cm), larg(cm), nome)
      */
-    public static int MODELO_SAIDA = 3;
+    public static int MODELO_SAIDA = 4;
     
     // === GAVETAS ===
     /** Vão entre cada gaveta (mm) */
