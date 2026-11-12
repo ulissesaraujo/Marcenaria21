@@ -58,7 +58,7 @@ public class Gabinete {
 		// PRATELEIRA (sempre usa larguraInterna, não muda com rodízio)
 		if (qtdPrateleira > 0) {
 			// Se um dia for colocar fundo no armário, vai ter que colocar a folga do fundo.
-			Peca prateleira = new Peca((int) (qtdPrateleira), larguraInterna, profundidadeTotal - FOLGA_PRATELEIRA_PROFUNDIDADE_1, "Pratele", 0, 0, 0, 0, material);
+			Peca prateleira = new Peca((int) (qtdPrateleira), larguraInterna, profundidadeTotal, "Pratele", 0, 0, 0, 0, material);
 			prateleira.imprimir(MODELO_SAIDA);
 		}
 
