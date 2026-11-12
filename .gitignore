@@ -1,0 +1,16 @@
+# Binários compilados
+/bin/
+
+# Eclipse
+.classpath
+.project
+.settings/
+
+# IDE
+*.iml
+.idea/
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
