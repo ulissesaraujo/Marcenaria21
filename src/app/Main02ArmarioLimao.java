@@ -22,7 +22,7 @@ public class Main02ArmarioLimao {
 		// Peca.descricao();
 		// GABINETE01
 		larguraTotalBase = larguraTotalBase+larguraTotal;
-		Gabinete.normal(larguraTotal, alturaArmario, profundidadeArmario, profundidadeRodape, material, espessuraMDF, qtdPrateleira, qtdPorta, dobradicaReta, comRodizio, false);
+		Gabinete.normal(larguraTotal, alturaArmario, profundidadeArmario, profundidadeRodape, material, espessuraMDF, qtdPrateleira, qtdPorta, dobradicaReta, comRodizio, false, false);
 
 		boolean temGaveteiro = false;
 			// GAVETEIRO

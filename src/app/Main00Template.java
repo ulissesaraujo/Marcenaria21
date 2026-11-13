@@ -57,7 +57,8 @@ public class Main00Template {
 		double profundidade = profundidadeArmario;
 		double qtdPrateleira = 0;
 		double qtdPorta = 2;  // 0=sem porta, 1=porta única, 2=porta dupla
-		boolean fitamentoPorta = true;  // true=fita nos 4 lados da porta, false=sem fita
+		boolean comFitamento = true;  // true=aplica fita conforme regras, false=sem fita
+		boolean fitaParede = false;   // true=f2 com fita (armário isolado), false=f2 sem fita (encosta na parede)
 		
 		
 		// ══════════════════════════════════════════════════════════════════
@@ -67,7 +68,7 @@ public class Main00Template {
 		// altere aqui o que for diferente do padrão
 		
 		Gabinete.normal(largura, altura, profundidade, profundidadeRodape, 
-				material, espessuraMDF, qtdPrateleira, qtdPorta, dobradicaReta, comRodizio, fitamentoPorta);
+				material, espessuraMDF, qtdPrateleira, qtdPorta, dobradicaReta, comRodizio, comFitamento, fitaParede);
 		
 		// ══════════════════════════════════════════════════════════════════
 		// GAVETEIRO - VALORES PADRÃO

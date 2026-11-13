@@ -21,10 +21,11 @@ public class Gabinete {
 	 * @param qtdPorta quantidade de portas (0, 1 ou 2)
 	 * @param dobradicaReta true=reta, false=curva
 	 * @param comRodizio true=base maior (larguraTotal), lateral menor (altura - 2*MDF)
-	 * @param fitamentoPorta true=fita nos 4 lados da porta, false=sem fita
+	 * @param comFitamento true=aplica fita conforme regras, false=sem fita
+	 * @param fitaParede true=f2 com fita (armário isolado), false=f2 sem fita (encosta na parede)
 	 */
 	public static void normal(double larguraTotal, double altura, double profundidadeArmario, double profundidadeRodape, 
-			String material, double espessuraMDF, double qtdPrateleira, double qtdPorta, boolean dobradicaReta, boolean comRodizio, boolean fitamentoPorta) {
+			String material, double espessuraMDF, double qtdPrateleira, double qtdPorta, boolean dobradicaReta, boolean comRodizio, boolean comFitamento, boolean fitaParede) {
 		
 		validarQuantidaPorta(qtdPorta);
 		double larguraInterna = larguraTotal - (espessuraMDF * 2);
@@ -33,46 +34,53 @@ public class Gabinete {
 		// Ajuste para rodízio: lateral menor, base maior
 		double alturaLateral = comRodizio ? altura - (espessuraMDF * 2) : altura;
 		double larguraBase = comRodizio ? larguraTotal : larguraInterna;
-
-		// LATERAL - profundidade total (armário + rodapé)
 		double profundidadeTotal = profundidadeArmario + profundidadeRodape;
-		int fita12 = fitamentoPorta ? 1 : 0;
-		int fita34 = fitamentoPorta && !comRodizio ? 1 : 0;
-		Peca lateral = new Peca((int) (qtdPeca + 1), alturaLateral, profundidadeTotal, "Lateral", fita12, fita12, fita34, fita34, material);
+
+		// LATERAL
+		// Sem rodízio: 1,0,1,1 | Com rodízio: 1,0,0,0
+		int f1 = comFitamento ? 1 : 0;
+		int f2 = comFitamento && fitaParede ? 1 : 0;
+		int f3 = comFitamento && !comRodizio ? 1 : 0;
+		int f4 = comFitamento && !comRodizio ? 1 : 0;
+		Peca lateral = new Peca((int) (qtdPeca + 1), alturaLateral, profundidadeTotal, "Lateral", f1, f2, f3, f4, material);
 		lateral.imprimir(MODELO_SAIDA);
 
 		// BASE
-		fita12 = fitamentoPorta ? 1 : 0;
-		fita34 = fitamentoPorta && comRodizio ? 1 : 0;
+		// Sem rodízio: 1,0,0,0 | Com rodízio: 1,0,1,1
+		f1 = comFitamento ? 1 : 0;
+		f2 = comFitamento && fitaParede ? 1 : 0;
+		f3 = comFitamento && comRodizio ? 1 : 0;
+		f4 = comFitamento && comRodizio ? 1 : 0;
 		if (profundidadeRodape == 0) {
 			// Sem rodapé: base única
-			Peca base = new Peca((int) (qtdPeca + 1), larguraBase, profundidadeArmario, "Base", fita12, fita12, fita34, fita34, material);
+			Peca base = new Peca((int) (qtdPeca + 1), larguraBase, profundidadeArmario, "Base", f1, f2, f3, f4, material);
 			base.imprimir(MODELO_SAIDA);
 		} else {
 			// Com rodapé: base superior (profundidade total) e base inferior (recuada)
-			Peca baseSup = new Peca((int) (qtdPeca), larguraBase, profundidadeTotal, "BaseSup", fita12, fita12, fita34, fita34, material);
+			Peca baseSup = new Peca((int) (qtdPeca), larguraBase, profundidadeTotal, "BaseSup", f1, f2, f3, f4, material);
 			baseSup.imprimir(MODELO_SAIDA);
-			Peca baseInf = new Peca((int) (qtdPeca), larguraBase, profundidadeArmario, "BaseInf", fita12, fita12, fita34, fita34, material);
+			Peca baseInf = new Peca((int) (qtdPeca), larguraBase, profundidadeArmario, "BaseInf", f1, f2, f3, f4, material);
 			baseInf.imprimir(MODELO_SAIDA);
 		}
 
 		// PRATELEIRA (sempre usa larguraInterna, não muda com rodízio)
+		// Sempre: 1,0,0,0
 		if (qtdPrateleira > 0) {
-			// Se um dia for colocar fundo no armário, vai ter que colocar a folga do fundo.
-			fita12 = fitamentoPorta ? 1 : 0;
-			fita34 = 0;
-			Peca prateleira = new Peca((int) (qtdPrateleira), larguraInterna, profundidadeTotal, "Pratele", fita12, fita12, fita34, fita34, material);
+			f1 = comFitamento ? 1 : 0;
+			f2 = comFitamento && fitaParede ? 1 : 0;
+			f3 = 0;
+			f4 = 0;
+			Peca prateleira = new Peca((int) (qtdPrateleira), larguraInterna, profundidadeTotal, "Pratele", f1, f2, f3, f4, material);
 			prateleira.imprimir(MODELO_SAIDA);
 		}
 
 		// PORTA (sempre usa altura original, não muda com rodízio)
+		// Sempre: 1,1,1,1
 		if (qtdPorta != 0) {
-			double excecaoParaChapaMenor1 = 1; 
-			double diminuirDobradica = dobradicaReta ? DESCONTO_DOBRADICA_RETA_1+excecaoParaChapaMenor1 : DESCONTO_DOBRADICA_CURVA_7;
+			double diminuirDobradica = dobradicaReta ? DESCONTO_DOBRADICA_RETA_1 : DESCONTO_DOBRADICA_CURVA_7;
 			double diminuirPorta = diminuirDobradica + VAO_ENTRE_PORTAS_3;
-			int fita = fitamentoPorta ? 1 : 0;
-			double excecaoParaChapaMenor2 = 4; 
-			Peca porta = new Peca((int) (qtdPorta), altura - DESCONTO_ALTURA_PORTA_6-excecaoParaChapaMenor2, (larguraTotal / qtdPorta) - diminuirPorta, "Porta", fita, fita, fita, fita, material);
+			int fita = comFitamento ? 1 : 0;
+			Peca porta = new Peca((int) (qtdPorta), altura - DESCONTO_ALTURA_PORTA_6, (larguraTotal / qtdPorta) - diminuirPorta, "Porta", fita, fita, fita, fita, material);
 			porta.imprimir(MODELO_SAIDA);
 		}
 	}

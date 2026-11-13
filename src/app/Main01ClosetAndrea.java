@@ -22,7 +22,7 @@ public class Main01ClosetAndrea {
 		// Peca.descricao();
 		// GABINETE01
 		larguraTotalBase = larguraTotalBase+larguraTotal;
-		Gabinete.normal(larguraTotal, alturaArmario, profundidadeArmario, profundidadeRodape, material, espessuraMDF, qtdPrateleira, qtdPorta, dobradicaReta, comRodizio, false);
+		Gabinete.normal(larguraTotal, alturaArmario, profundidadeArmario, profundidadeRodape, material, espessuraMDF, qtdPrateleira, qtdPorta, dobradicaReta, comRodizio, false, false);
 
 		// GAVETEIRO
 		double alturaGaveteiro = 800;
@@ -39,7 +39,7 @@ public class Main01ClosetAndrea {
 		// System.out.println();
 		// GABINETE02
 		larguraTotalBase = larguraTotalBase+larguraTotal;
-		Gabinete.normal(larguraTotal, alturaArmario, profundidadeArmario, profundidadeRodape, material, espessuraMDF, qtdPrateleira, qtdPorta, dobradicaReta, comRodizio, false);
+		Gabinete.normal(larguraTotal, alturaArmario, profundidadeArmario, profundidadeRodape, material, espessuraMDF, qtdPrateleira, qtdPorta, dobradicaReta, comRodizio, false, false);
 
 		// GAVETEIRO02
 		Gaveteiro.normal(larguraTotal - (espessuraMDF * 2) - diminuirLarguraEspacamentoPorta, alturaGaveteiro, alturaGaveteiraCorrecao, qtdGavetas, profundidadeGaveteiro, profundidadeArmario, espessuraMDF, material,
@@ -50,7 +50,7 @@ public class Main01ClosetAndrea {
 		qtdPrateleira=3;
 		larguraTotalBase = larguraTotalBase+larguraTotal;
 		// FIXME Ulisses(11 de jun. de 2026) - ver se a lateral vai até ao final
-		Gabinete.normal(larguraTotal, alturaArmario, profundidadeArmario, profundidadeRodape, material, espessuraMDF, qtdPrateleira, qtdPorta, dobradicaReta, comRodizio, false);
+		Gabinete.normal(larguraTotal, alturaArmario, profundidadeArmario, profundidadeRodape, material, espessuraMDF, qtdPrateleira, qtdPorta, dobradicaReta, comRodizio, false, false);
 
 		// GAVETEIRO03
 		//		alturaGaveteiro = 600;
